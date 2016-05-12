@@ -29,6 +29,24 @@ class EntryDropdownFieldType extends EntriesFieldType
     }
 
     /**
+     * @inheritDoc IFieldType::prepValueFromPost()
+     *
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    public function prepValueFromPost($value)
+    {
+        $value = parent::prepValueFromPost($value);
+
+        $value = array_filter($value, function($id) {
+            return $id !== '';
+        });
+
+        return $value ? $value : null;
+    }
+
+    /**
      * @inheritDoc IFieldType::getInputHtml()
      *
      * @param string $name
