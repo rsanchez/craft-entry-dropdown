@@ -91,7 +91,11 @@ class EntryDropdownFieldType extends EntriesFieldType
         }
 
         foreach ($entries->find() as $element) {
-            $options[$element->id] = $element->title;
+            if ($element->section->type === SectionType::Structure && $element->level > 1) {
+                $options[$element->id] = str_repeat('–', $element->level - 1).' '.$element->title;
+            } else {
+                $options[$element->id] = $element->title;
+            }
         }
 
         return craft()->templates->render('_includes/forms/select', array(
