@@ -43,7 +43,7 @@ class EntryDropdownFieldType extends EntriesFieldType
             return $id !== '';
         });
 
-        return $value ? $value : null;
+        return $value;
     }
 
     /**
